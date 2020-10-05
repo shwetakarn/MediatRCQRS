@@ -53,7 +53,7 @@ namespace AspNetCoreMediatRSample.Handlers
             return person;
         }
 
-        //Delete
+        //Deletes
         public async Task<Unit> Handle(DeletePerson request, CancellationToken cancellationToken)
         {
             var person = await ctx.Persons.SingleOrDefaultAsync(v => v.Id == request.Id);
