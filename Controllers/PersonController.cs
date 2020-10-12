@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetCoreMediatRSample.Commands;
 using AspNetCoreMediatRSample.Models;
+using AspNetCoreMediatRSample.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,5 +41,18 @@ namespace AspNetCoreMediatRSample.Controllers
         await mediator.Send(request);
         return Ok();
     }
+
+    [HttpGet("GetList")]
+    public async Task<IEnumerable<Person>> Get()
+    {
+        return await mediator.Send(new GetPersonList());
+    }
+
+     [HttpGet("{id}")]
+    public async Task<Person> Get(int id)
+    {
+        return await mediator.Send(new GetPersonQuery(id));
+    }
+
     }
 }
